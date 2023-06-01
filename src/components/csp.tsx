@@ -13,7 +13,7 @@ const CSP = (props: DocumentProps): any => {
   const cspSettings = {
     'default-src': ["'self'"],
     'script-src': ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
-    'connect-src': ["'self'", 'ws://localhost:*', 'https://apistaging.pwly.io'],
+    'connect-src': ["'self'", 'ws://localhost:*', 'https://firestore.googleapis.com'],
     'style-src': ["'self'", "'unsafe-inline'"],
     'img-src': ["'self'"]
   }
