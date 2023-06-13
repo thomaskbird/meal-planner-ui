@@ -3,6 +3,7 @@ import {collection, getFirestore, orderBy} from '@firebase/firestore';
 import moment from 'moment';
 import config from '~/config/site';
 import {query} from '@firebase/database';
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -29,29 +30,38 @@ const makeArrayFromSnapshot = (snap) => {
 }
 
 let firestoreDb = null;
-let timeTracker = null;
+let mealTime = null;
 
 try {
   if(!getApps().length) {
-    timeTracker = initializeApp(firebaseConfig);
+    mealTime = initializeApp(firebaseConfig);
   } else {
-    timeTracker = getApp();
+    mealTime = getApp();
   }
 
-  firestoreDb = getFirestore(timeTracker);
+  firestoreDb = getFirestore(mealTime);
 } catch(e) {
   console.log('e', e);
 }
 
+const Auth = getAuth();
+
 const collectionRecipes = collection(firestoreDb, 'recipes');
+
+const collectionUsers = collection(firestoreDb, 'users');
 
 const queryAllRecipesOrdered = query(collectionRecipes, orderBy('created', 'desc'));
 
+const queryAllUsersOrdered = query(collectionUsers, orderBy('created', 'desc'));
+
 export {
   firestoreDb,
-  timeTracker,
+  mealTime,
+  Auth,
   collectionRecipes,
+  collectionUsers,
   queryAllRecipesOrdered,
+  queryAllUsersOrdered,
   renderFirestoreTimestamp,
   makeArrayFromSnapshot
 }

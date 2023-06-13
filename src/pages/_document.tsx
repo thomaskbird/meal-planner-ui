@@ -28,6 +28,14 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <CSP {...this.props} />
+          <link
+            rel="stylesheet"
+            href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          />
+          <link
+            rel="stylesheet"
+            href="//fonts.googleapis.com/icon?family=Material+Icons"
+          />
         </Head>
         <body>
           <Main />
